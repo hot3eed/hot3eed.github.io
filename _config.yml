@@ -1,0 +1,10 @@
+remote_theme: b2a3e8/jekyll-theme-console
+
+google_analytics: UA-158670788-1
+
+header_pages:
+        - index.md
+        - contact.md
+
+footer: '<a href="https://twitter.com/hot3eed">@hot3eed</a>'
+
