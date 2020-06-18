@@ -134,7 +134,7 @@ sub        x8,x9,x8, LSL #0x1     ; effectively tv_sec *= 1000
 ```
 
 ### Scratch arguments
-This one isn't very prevalent in the binary but it's still interesting to mention. I've seen it used in a function that reads the first 8 bytes at a pointer. It has the sginature: 
+This one isn't very prevalent in the binary but it's still interesting to mention. I've seen it used in a function that reads the first 8 bytes at a pointer. It has the signature: 
 ```
 uint64_t get_first_qword(uint64_t scratch1, void *src, uint64_t scratch2);
 ```
