@@ -8,3 +8,5 @@ header_pages:
 
 footer: '<a href="https://twitter.com/hot3eed">@hot3eed</a>'
 
+plugins:
+  - jekyll-feed
