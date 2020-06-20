@@ -30,7 +30,7 @@ ldr       x8,[x28, x8, LSL #0x3]
 br        x8
 {% endhighlight %}
 
-See the first two instructions. Why would they compare `x8` with `0xb` right after storing `0x3` in it? Opaque predicates<sup>[1]</sup>. The `csel` condition will always be false, but that doesn't matter, because as far as the disassembler is concerned, this is a condition, and conditions need to be evaluated at runtime. Replace every single jump (including legit conditions) with a similar block, and you've completely destroyed the CFG for any modern disassembler. Now Ghidra/IDA would be happy to display what it thinks is a small function with a tail call, which is in fact a huge function. I'll give Ghidra that it's able to calculate the address in `br x8` but only for the first block (because that's where it thinks the function ends). Now that's a plugin idea: use emulation to calculate all the addresses in indirect branches with opaque predicates, which would require an emulation. I actually worked for a bit on implementing this but then that's not even half the battle for this binary.
+See the first two instructions. Why would they compare `x8` with `0xb` right after storing `0x3` in it? Opaque predicates<sup>[1]</sup>. The `csel` condition will always be false, but that doesn't matter, because as far as the disassembler is concerned, this is a condition, and conditions need to be evaluated at runtime. Replace every single jump (including legit conditions) with a similar block, and you've completely destroyed the CFG for any modern disassembler. Now Ghidra/IDA would be happy to display what it thinks is a small function with a tail call, which is in fact a huge function. I'll give Ghidra that it's able to calculate the address in `br x8` but only for the first block (because that's where it thinks the function ends). Now that's a plugin idea: use emulation to calculate all the addresses in indirect branches with opaque predicates. I actually worked for a bit on implementing this but then that's not even half the battle for this binary.
 
 ### Bogus instructions AKA dead code
 Every few blocks you'll find a block that loads a global constant, does some complex-looking operations on it, then just discards it and branches to somewhere else. Those are just there to confuse you and are easily detectible once you see them for a couple of times, so it's not much of a hindrance.
@@ -48,7 +48,7 @@ Then, in another block they would:
 blr x23
 {% endhighlight %}
 
-The disassembler doesn't know the value of `x23` here because, as stated above, it treats the block as if it doesn't block to the current function.
+The disassembler doesn't know the value of `x23` here because, as stated above, it treats the block as if it doesn't belong to the current function.
 
 ### Loop unrolling
 When you have a loop that comes with a pre-determined/fixed counter, you can get rid of the counter, and hardcode the loop iterations. This comes at a cost of the binary size, and it's slightly faster than using a counter. Snap uses this technique in an encryption function. This block moves a huge array of bytes to another, notice how the offsets increment, replacing the counter:
@@ -94,7 +94,7 @@ void joint_function(uint64_t function_id, void *retval, void *argv[]) {
 }
 {% endhighlight %}
 
-`argv` would include all the arguments needed. Now strip all symbols, add the above obfuscations and you've got an unintelligble mammoth of a function. You would think that you could still trace all calls to the joint function and treat the `path_key` as an identifier to the function you're interested in. But breakpoints won't act as you'd expect them to. See next.
+`argv` would include all the arguments needed. Now strip all symbols, add the above obfuscations and you've got an unintelligble mammoth of a function. You would think that you could still trace all calls to the joint function and treat the `function_id` as an identifier to the function you're interested in. But breakpoints won't act as you'd expect them to. See next.
 
 ## The solution: not breakpoints (AKA anti-debugging measures)
 Now most control flow obfuscation is against static analysis, using a debugger to get past the above would do it. Not so fast. Most functions call an anti-debugging function, which I named appropriately and whose signature is:
@@ -103,8 +103,8 @@ Now most control flow obfuscation is against static analysis, using a debugger t
 uint64_t fuckup_debugging(/* some args */, void *func);
 {% endhighlight %}
 
-There's at least 9 such functions, all the same behavior. I haven't taken the time to reverse them but their behavior is clear. \
-Software breakpoints work by patching the instruction at the designated address in memory. The patch is an instruction that triggers an interrupt that's handled by the parent process, the debugger<sup>[3]</sup>. That makes them easily detectable; if you have a checksum of what a certain area in memory looks like, a breakpoint in that area will invalidate the checksum. Or, you could look for the interrupt instruction's `brk` bytes in the binary. 
+There's at least 9 such functions, all the same behavior. I haven't taken the time to reverse them but their behavior is clear. 
+Software breakpoints work by patching the instruction at the designated address in memory. The patch is an instruction that triggers an interrupt that's handled by the parent process, the debugger<sup>[3]</sup>. That makes them easily detectable; if you have a checksum of what a certain area in memory looks like, a breakpoint in that area will invalidate the checksum. Or, you could look for the interrupt instruction's (`brk`) bytes in the binary. 
 
 After doing its check, `fuckup_debugging` will return a `uint64_t`, its value which depends on whether there was a breakpoint detected. So actually there's only two possible values. Isn't that called a `bool`? Yes. But a boolean would be trivial to patch. But with an int you can't guess the "right" value. The `fuckup_debugging` caller uses the return value (I'll call it the `path_key`) to load an address from a jump table, if there was a breakpoint, the fetched address would lead to an infinite loop, leading the app to just keep loading with no feedback, which is the right way to do it.
 
