@@ -226,7 +226,7 @@ $ otool -s __DATA __mod_init_func Snapchat | wc -l
      410
 {% endhighlight %}
 
-And since it's two function pointers per line, their actualy number is 816 (after discarding the first two lines). But wait, all of those point to the same function? They're probably using duplicates as a distraction and to make your job harder, let's see how many are there. After doing some regex to get the functions pointers, I found there's 769 _unique_ functions, still a huge number.
+And since it's two function pointers per line, their actual number is 816 (after discarding the first two lines). But wait, all of those point to the same function? They're probably using duplicates as a distraction and to make your job harder, let's see how many are there. After doing some regex to get the functions pointers, I found there's 769 _unique_ functions, still a huge number.
 
 {% highlight shell %}
 $ cat mod_init_func | sort -u | wc -l
