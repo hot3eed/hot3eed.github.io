@@ -184,5 +184,5 @@ There's much more to token generation than obfuscations. Being able to work with
 [11]: https://github.com/JonathanSalwan/Triton
 [12]: https://github.com/JonathanSalwan/Triton/blob/master/src/examples/python/synthetizing_obfuscated_expressions.py
 [13]: https://github.com/quarkslab/sspam
-[14]: https://twitter.com/hot3eed 
+[14]: https://twitter.com/adriengnt/status/1274970522816851971 
 [15]: https://pythonhosted.org/arybo/concepts.html#sec-theory-esf
