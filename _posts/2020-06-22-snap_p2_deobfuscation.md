@@ -3,7 +3,7 @@ title: "Reverse Engineering Snapchat (Part II): Deobfuscating the Undeobfuscatab
 layout: post
 ---
 
-# Reverse Engineering Snapchat (Part II): Debofuscating the Undeobfuscatable
+# Reverse Engineering Snapchat (Part II): Deobfuscating the Undeobfuscatable
 2020-06-22
 
 # Black box
