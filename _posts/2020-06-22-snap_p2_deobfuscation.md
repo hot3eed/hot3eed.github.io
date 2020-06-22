@@ -166,6 +166,8 @@ proved
 
 Bingo!
 
+_EDIT_: [@adriengnt](https://twitter.com/adriengnt) brought to my attention Arybo which he worked on at Quarkslab (they seem to have a monopoly on MBA). It was able to simplify the expression above in one go<sup>[14]</sup>. I'd say this is state of the art as far as MBA obfuscation goes. Its concepts<sup>[15]</sup> are interesting if you wanna get technical.
+
 # We cool, Snap?
 There's much more to token generation than obfuscations. Being able to work with the binary at this level is only half the battle. I won't disclose how to communicate with the API, because if Godfather has taught us anything, it's that the perfect number of sequels is one.
 
@@ -182,3 +184,5 @@ There's much more to token generation than obfuscations. Being able to work with
 [11]: https://github.com/JonathanSalwan/Triton
 [12]: https://github.com/JonathanSalwan/Triton/blob/master/src/examples/python/synthetizing_obfuscated_expressions.py
 [13]: https://github.com/quarkslab/sspam
+[14]: https://twitter.com/hot3eed 
+[15]: https://pythonhosted.org/arybo/concepts.html#sec-theory-esf
