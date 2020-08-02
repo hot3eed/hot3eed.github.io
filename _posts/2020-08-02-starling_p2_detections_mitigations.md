@@ -104,7 +104,9 @@ Possible mitigation: an obfuscated checksum function that verifies the integrity
 
 ## More obfuscation?
 As long as it doesn't come at a huge performance cost, more obfuscation techniques would help make breaking jailbreak/debugger detection an even harder task than it already is, and give Starling more advantage in the cat-and-mouse that is reverse engineering.
+<br/>
 
+PS: I'm available for [hire](https://hot3eed.github.io/contact.html)
 
 [1]: https://frida.re/docs/modes/#injected
 [2]: https://mobile-security.gitbook.io/mobile-security-testing-guide/ios-testing-guide/0x06j-testing-resiliency-against-reverse-engineering
