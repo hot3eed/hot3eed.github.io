@@ -75,8 +75,8 @@ After confirming that the device isn't jailbroken using the methods above, the b
 
 {% highlight c %}
 bool is_debugged = amIBeingDebugged();
-is_debugged &= amIBeingDebugged();
-is_debugged &= amIBeingDebugged();
+is_debugged |= amIBeingDebugged();
+is_debugged |= amIBeingDebugged();
 {% endhighlight %}
 
 
