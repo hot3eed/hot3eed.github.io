@@ -94,7 +94,7 @@ Although three `sysctl`s are better than one, a non-standard debugger detection 
 
 ### Code injection
 Currently nothing stops someone from injecting a dylib that hooks<sup>[12]</sup> ObjC/Swift methods in this binary and changes its behavior. That's true even on a jailed device due to the lack of the signature check above. 
-Mitigation: verify that no suspicious dylibs (dynamic libraries) are loaded. This could be done using `dyld` (dynamic linker) such as `dlsym()`<sup>[13]</sup> and `_dyld_get_image_count()`<sup>[14]</sup>.
+Mitigation: verify that no suspicious dylibs (dynamic libraries) are loaded. This could be done using `dyld` (dynamic linker) functions such as `dlsym()`<sup>[13]</sup> and `_dyld_get_image_count()`<sup>[14]</sup>.
 
 
 ### Anti-tampering
