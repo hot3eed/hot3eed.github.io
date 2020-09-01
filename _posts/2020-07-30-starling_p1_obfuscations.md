@@ -221,7 +221,7 @@ I've redacted the blocks' logic for simplicity, but in the binary these blocks d
 When I'm working on a binary like this, as a I begin to understand what's being done here, I usually have some ideas on how to de-obfuscate this using symbolic execution, tainting, slicing, or other fancy techniques<sup>[7]</sup>. But reverse engineering is time management, so I usually delay investing the time until I find the "manual" approach too time intensive. And almost always the manual approach wins. Or, I make progress with it before resorting to other approaches, this binary was no exception. And by manual I mean a debugger, disassembler and possibly an execution trace. 
 
 
-### You can't single-step your way out of it
+### You can't single-step your way through it 
 With all these obfuscations in mind, the two things that contribute the most to making this function quite tricky to reverse are opaque predicates and function inlining. Because strings are obfuscated, opaque predicates are used heavily (maybe half-ish of the instructions are bogus), and there are loops that check for a considerable amount of files, you'll find yourself swimming in a sea of assembly, most of which is opaque predicates. So my usual way of single-stepping and reversing to C wasn't practical, and Frida Stalker would be naturally the way to go here.
 
 
