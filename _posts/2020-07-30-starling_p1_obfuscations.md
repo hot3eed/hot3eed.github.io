@@ -226,7 +226,7 @@ With all these obfuscations in mind, the two things that contribute the most to 
 
 
 ### The poor man's Frida Stalker
-When I tried to spawn Starling from using Frida, with a script that stalks `main`, it crashed as expected, but it didn't give an execution trace up to the crash, which was all I wanted. 
+When I tried to spawn Starling using Frida, with a script that stalks `main`, it crashed as expected, but it didn't give an execution trace up to the crash, which was all I wanted. 
 
 {% highlight shell %}
 $ frida -U -f uk.co.starlingbank.Starling -l main_stalk.js
