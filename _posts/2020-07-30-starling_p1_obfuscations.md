@@ -7,7 +7,7 @@ layout: post
 2020-07-30
 <br/>
 
-UK banks seem to have an earned reputation of tight securtiy<sup>[1]</sup>. Starling is one good example.
+UK banks seem to have an earned reputation of tight security<sup>[1]</sup>. Starling is one good example.
 <br/>
 
 If you launch the Starling binary (version 1.47.0, on iOS) on a jailbroken device, or with a debugger, it'll crash. And you could tell from the crashlog that this is gonna be an interesting binary. 
